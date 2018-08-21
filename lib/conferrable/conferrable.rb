@@ -6,6 +6,7 @@
 #
 
 require 'yaml'
+require 'erb'
 
 require_relative 'file_utilities'
 require_relative 'configuration'

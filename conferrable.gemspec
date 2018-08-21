@@ -2,7 +2,7 @@ require "./lib/conferrable/version"
 
 Gem::Specification.new do |s|
 
-  s.name        = 'nautics'
+  s.name        = 'conferrable'
   s.version     = Conferrable::VERSION
   s.summary     = "Simple YAML file-based configuration management"
 

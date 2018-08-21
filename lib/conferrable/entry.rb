@@ -11,7 +11,7 @@ module Conferrable
     class << self
 
       def default_folder
-        @default_folder || File.join('..', '..', 'config')
+        @default_folder || File.join('.', 'config')
       end
 
       def default_folder=(path)
@@ -19,9 +19,7 @@ module Conferrable
       end
 
       def default_file(name)
-        name = "#{name}.yml.erb"
-        relative_file = File.join(default_folder, name.to_s)
-        File.expand_path(relative_file, __dir__)
+        File.join(default_folder, "#{name}.yml.erb")
       end
 
     end

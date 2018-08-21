@@ -18,7 +18,7 @@ module Conferrable
           elsif File.exist?(filename)
             filename
           else
-            raise ArgumentError, "Cannot find file: #{filename}"
+            raise ArgumentError, "Cannot find file: #{filename} => #{File.expand_path(filename)}"
           end
         end.flatten
       end
