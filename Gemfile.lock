@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nautics (1.0.0)
+    conferrable (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -25,7 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nautics!
+  conferrable!
   rspec
 
 BUNDLED WITH

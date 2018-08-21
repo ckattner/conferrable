@@ -7,7 +7,9 @@ Gem::Specification.new do |s|
   s.summary     = "Simple YAML file-based configuration management"
 
   s.description = <<-EOS
-    empty.
+    We have seen our applications gain more and more static configuration files over time.
+    A common library we use on a daily basis is these configuration file loaders.
+    Conferrable standardizes how we interact with these static YAML configuration files.
   EOS
 
   s.authors     = [ 'Matthew Ruggio' ]
@@ -15,7 +17,7 @@ Gem::Specification.new do |s|
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.homepage    = 'https://github.com/bluemarblepayroll/logicality-rb'
+  s.homepage    = 'https://github.com/bluemarblepayroll/conferrale'
   s.license     = 'MIT'
 
   s.required_ruby_version = '>= 2.3.1'
