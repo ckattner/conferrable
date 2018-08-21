@@ -14,7 +14,7 @@ module Conferrable
           next unless filename && filename.to_s.length > 0
 
           if File.exist?(filename) && File.directory?(filename)
-            Dir.glob(File.join(filename, '**', '*')).select { |f| !File.directory?(f) }
+            Dir.glob(File.join(filename, '**', '*.yml.erb')).select { |f| !File.directory?(f) }
           elsif File.exist?(filename)
             filename
           else
