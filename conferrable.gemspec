@@ -1,7 +1,6 @@
 require "./lib/conferrable/version"
 
 Gem::Specification.new do |s|
-
   s.name        = 'conferrable'
   s.version     = Conferrable::VERSION
   s.summary     = "Simple YAML file-based configuration management"
@@ -23,5 +22,4 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.3.1'
 
   s.add_development_dependency('rspec')
-
 end
