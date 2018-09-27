@@ -5,6 +5,4 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-module Conferrable
-  VERSION = "1.0.1"
-end
+require 'conferrable/conferrable'
