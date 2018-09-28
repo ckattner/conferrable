@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -6,29 +8,20 @@
 #
 
 module Conferrable
+  # Base class that defines main hash-based implementation.
   class Configuration
+    attr_reader :all
 
     def initialize(*configs)
-      load!(configs)
+      @all = {}
+
+      overlay(configs)
     end
 
-    def all
-      @all || {}
-    end
-
-    def load!(*configs)
-      configs.flatten.compact.each { |c| overlay(c) }
+    def overlay(*configs)
+      configs.flatten.compact.each { |config| @all.merge!(config || {}) }
 
       nil
     end
-
-    private
-
-    def overlay(config)
-      @all = {} unless @all
-
-      @all.merge!(config || {})
-    end
-
   end
 end

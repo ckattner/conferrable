@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -6,15 +8,16 @@
 #
 
 module Conferrable
+  # Extra utilities that help, but do not define the domain.
   class FileUtilities
     class << self
-
       def resolve(filenames)
         Array(filenames).flatten.map do |filename|
-          next unless filename && filename.to_s.length > 0
+          next unless filename && filename.to_s.length.positive?
 
           if File.exist?(filename) && File.directory?(filename)
-            Dir.glob(File.join(filename, '**', '*.yml.erb')).select { |f| !File.directory?(f) }
+            dir_name = File.join(filename, '**', '*.yml.erb')
+            Dir.glob(dir_name).reject { |f| File.directory?(f) }
           elsif File.exist?(filename)
             filename
           else
@@ -24,9 +27,8 @@ module Conferrable
       end
 
       def read(filename)
-        YAML.load(ERB.new(IO.read(filename)).result)
+        YAML.safe_load(ERB.new(IO.read(filename)).result)
       end
-
     end
   end
 end

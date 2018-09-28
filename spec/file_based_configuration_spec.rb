@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -8,24 +10,30 @@
 require './lib/conferrable'
 
 describe Conferrable::FileBasedConfiguration do
-
   let(:file1_path) { File.expand_path('spec/files/file1.yml.erb') }
   let(:file2_path) { File.expand_path('spec/files/file2.yml.erb') }
   let(:files_path) { File.expand_path('spec/files') }
-  let(:files) { [ file1_path, file2_path ]}
-
-  let(:file1) { "admin: true" }
-  let(:file2) { "admin: false" }
+  let(:files) { [file1_path, file2_path] }
+  let(:file1) { 'admin: true' }
+  let(:file2) { 'admin: false' }
 
   before(:each) do
     allow(::Conferrable::FileUtilities).to receive(:resolve).with([]).and_return([])
-    allow(::Conferrable::FileUtilities).to receive(:resolve).with([file1_path]).and_return([file1_path])
-    allow(::Conferrable::FileUtilities).to receive(:resolve).with([file2_path]).and_return([file2_path])
+
+    allow(::Conferrable::FileUtilities).to receive(:resolve).with([file1_path])
+                                                            .and_return([file1_path])
+
+    allow(::Conferrable::FileUtilities).to receive(:resolve).with([file2_path])
+                                                            .and_return([file2_path])
+
     allow(::Conferrable::FileUtilities).to receive(:resolve).with([files_path]).and_return(files)
+
     allow(::Conferrable::FileUtilities).to receive(:resolve).with([files]).and_return(files)
+
     allow(::Conferrable::FileUtilities).to receive(:resolve).with(files).and_return(files)
 
     allow(IO).to receive(:read).with(file1_path).and_return(file1)
+
     allow(IO).to receive(:read).with(file2_path).and_return(file2)
   end
 
@@ -57,7 +65,7 @@ describe Conferrable::FileBasedConfiguration do
     expect(admin_value).to be false
 
     # Test passing in an nested arrays
-    config = Conferrable::FileBasedConfiguration.new([ [ files ] ])
+    config = Conferrable::FileBasedConfiguration.new([[files]])
     admin_value = config.all['admin']
     expect(admin_value).to be false
   end
@@ -69,5 +77,4 @@ describe Conferrable::FileBasedConfiguration do
     expect(admin_value).to be false
     expect(config.loaded_filenames).to eq(files)
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -6,30 +8,25 @@
 #
 
 module Conferrable
+  # This class builds on the basic concepts of Configuration and FileBasedConfiguration.
+  # It allows the ability to define a "configuration store".
   class Entry
-
     class << self
+      attr_writer :default_folder
 
       def default_folder
         @default_folder || File.join('.', 'config')
       end
 
-      def default_folder=(path)
-        @default_folder = path
-      end
-
       def default_file(name)
         File.join(default_folder, "#{name}.yml.erb")
       end
-
     end
 
-    attr_reader :key
-
-    attr_accessor :filenames
+    attr_reader :key, :filenames
 
     def initialize(key, filenames: nil)
-      raise ArgumentError, 'key is required' unless key && key.to_s.length > 0
+      raise ArgumentError, 'key is required' unless key && key.to_s.length.positive?
 
       @key        = key.to_s
       @filenames  = filenames
@@ -58,7 +55,7 @@ module Conferrable
     private
 
     def protected!
-      raise ArgumentError, "[Illegal] #{key} config store has been re-configured after it was loaded." if loaded?
+      raise ArgumentError, "#{key} config store has been re-configured after load." if loaded?
     end
 
     def loaded!
@@ -73,12 +70,11 @@ module Conferrable
 
       names = Array(filenames).flatten
 
-      names = [ self.class.default_file(key) ] if names.length == 0
+      names = [self.class.default_file(key)] if names.length.zero?
 
       @configuration = FileBasedConfiguration.new(names)
 
       loaded!
     end
-
   end
 end

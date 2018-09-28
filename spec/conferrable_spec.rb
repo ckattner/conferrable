@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -8,14 +10,14 @@
 require './lib/conferrable'
 
 describe Conferrable do
-
   let(:default_file_path) { './config/file1.yml.erb' }
   let(:default_abs_file_path) { File.expand_path(default_file_path) }
 
-  let(:default_file) { "admin: true" }
+  let(:default_file) { 'admin: true' }
 
   before(:each) do
-    allow(::Conferrable::FileUtilities).to receive(:resolve).with([default_file_path]).and_return([default_abs_file_path])
+    allow(::Conferrable::FileUtilities).to receive(:resolve).with([default_file_path])
+                                                            .and_return([default_abs_file_path])
 
     allow(IO).to receive(:read).with(default_abs_file_path).and_return(default_file)
   end
@@ -58,5 +60,4 @@ describe Conferrable do
       Conferrable.set_filenames(:file1, 'something_else.yml.erb')
     end.to raise_error(ArgumentError)
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -13,13 +15,12 @@ require_relative 'configuration'
 require_relative 'file_based_configuration'
 require_relative 'entry'
 
+# This is the main module that contains the class-level methods that define the main API.
 module Conferrable
-
   GET_PREFIX_MATCHER_REGEX  = /^get_(.+)$/
   GET_PREFIX_REGEX          = /^get_/
 
   class << self
-
     def clear!
       @entries = {}
 
@@ -63,6 +64,5 @@ module Conferrable
     def keyify(val)
       val.to_s.sub(GET_PREFIX_REGEX, '')
     end
-
   end
 end

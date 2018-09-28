@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -8,7 +10,6 @@
 require './lib/conferrable'
 
 describe Conferrable::Configuration do
-
   it 'should accept no initialization arguments' do
     config = Conferrable::Configuration.new
 
@@ -38,5 +39,4 @@ describe Conferrable::Configuration do
 
     expect(config.all.dig('options', 'admin')).to be false
   end
-
 end
