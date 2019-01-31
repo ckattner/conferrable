@@ -87,8 +87,36 @@ Basic steps to take to get this repository compiling:
 To execute the test suite run:
 
 ````
-rspec
+bundle exec rspec spec --format documentation
 ````
+
+Alternatively, you can have Guard watch for changes:
+
+````
+bundle exec guard
+````
+
+Also, do not forget to run Rubocop:
+
+````
+bundle exec rubocop
+````
+
+### Publishing
+
+Note: ensure you have proper authorization before trying to publish new versions.
+
+After code changes have successfully gone through the Pull Request review process then the following steps should be followed for publishing new versions:
+
+1. Merge Pull Request into master
+2. Update [lib/conferrable/version.rb](https://github.com/bluemarblepayroll/conferrable/blob/master/lib/conferrable/version.rb) [version number](https://semver.org/)
+3. Bundle
+4. Update [CHANGELOG.md](https://github.com/bluemarblepayroll/conferrable/blob/master/CHANGELOG.md)
+5. Commit & Push master to remote and ensure CI builds master successfully
+6. Build the project locally: `gem build conferrable`
+7. Publish package to NPM: `gem push conferrable-X.gem` where X is the version to push
+8. Tag master with new version: `git tag <version>`
+9. Push tags remotely: `git push origin --tags`
 
 ## License
 

@@ -20,3 +20,6 @@ Metrics/BlockLength:
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Max: 11
+
+AllCops:
+  TargetRubyVersion: 2.3
