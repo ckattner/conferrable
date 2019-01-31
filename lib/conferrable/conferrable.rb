@@ -17,8 +17,8 @@ require_relative 'entry'
 
 # This is the main module that contains the class-level methods that define the main API.
 module Conferrable
-  GET_PREFIX_MATCHER_REGEX  = /^get_(.+)$/
-  GET_PREFIX_REGEX          = /^get_/
+  GET_PREFIX_MATCHER_REGEX  = /^get_(.+)$/.freeze
+  GET_PREFIX_REGEX          = /^get_/.freeze
 
   class << self
     def clear!

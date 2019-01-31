@@ -16,8 +16,7 @@ module Conferrable
           next unless filename && filename.to_s.length.positive?
 
           if File.exist?(filename) && File.directory?(filename)
-            dir_name = File.join(filename, '**', '*.yml.erb')
-            Dir.glob(dir_name).reject { |f| File.directory?(f) }
+            glob_files_only(filename)
           elsif File.exist?(filename)
             filename
           else
@@ -28,6 +27,13 @@ module Conferrable
 
       def read(filename)
         YAML.safe_load(ERB.new(IO.read(filename)).result)
+      end
+
+      private
+
+      def glob_files_only(filename)
+        dir_name = File.join(filename, '**', '*.yml.erb')
+        Dir.glob(dir_name).reject { |f| File.directory?(f) }
       end
     end
   end
