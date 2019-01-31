@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    conferrable (1.0.3)
+    conferrable (1.0.4)
 
 GEM
   remote: https://rubygems.org/
