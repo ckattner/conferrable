@@ -7,7 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-require './lib/conferrable'
+require './spec/spec_helper'
 
 describe Conferrable::Configuration do
   it 'should accept no initialization arguments' do

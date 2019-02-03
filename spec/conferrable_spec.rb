@@ -7,7 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-require './lib/conferrable'
+require './spec/spec_helper'
 
 describe Conferrable do
   let(:default_file_path) { './config/file1.yml.erb' }
