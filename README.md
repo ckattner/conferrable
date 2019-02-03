@@ -1,6 +1,6 @@
 # Conferrable
 
-[![Build Status](https://travis-ci.org/bluemarblepayroll/conferrable.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/conferrable)
+[![Gem Version](https://badge.fury.io/rb/conferrable.svg)](https://badge.fury.io/rb/conferrable) [![Build Status](https://travis-ci.org/bluemarblepayroll/conferrable.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/conferrable) [![Maintainability](https://api.codeclimate.com/v1/badges/4149dfc2579b9345c4be/maintainability)](https://codeclimate.com/github/bluemarblepayroll/conferrable/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/4149dfc2579b9345c4be/test_coverage)](https://codeclimate.com/github/bluemarblepayroll/conferrable/test_coverage)
 
 We have seen our applications gain more and more static configuration files over time.  A common library we use on a daily basis is these configuration file loaders.  Conferrable standardizes how we interact with these static YAML configuration files.  It offers a simple and extendable API for dealing with the following scenarios:
 
