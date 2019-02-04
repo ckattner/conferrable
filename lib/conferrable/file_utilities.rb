@@ -15,13 +15,7 @@ module Conferrable
         Array(filenames).flatten.map do |filename|
           next unless filename && filename.to_s.length.positive?
 
-          if File.exist?(filename) && File.directory?(filename)
-            glob_files_only(filename)
-          elsif File.exist?(filename)
-            filename
-          else
-            raise ArgumentError, "Cannot find file: #{filename} => #{File.expand_path(filename)}"
-          end
+          list(filename)
         end.flatten
       end
 
@@ -30,6 +24,16 @@ module Conferrable
       end
 
       private
+
+      def list(filename)
+        if File.exist?(filename) && File.directory?(filename)
+          glob_files_only(filename)
+        elsif File.exist?(filename)
+          filename
+        else
+          raise ArgumentError, "Cannot find file: #{filename} => #{File.expand_path(filename)}"
+        end
+      end
 
       def glob_files_only(filename)
         dir_name = File.join(filename, '**', '*.yml.erb')
