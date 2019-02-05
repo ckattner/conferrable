@@ -10,7 +10,7 @@
 require 'simplecov'
 require 'simplecov-console'
 
-require './lib/conferrable'
-
 SimpleCov.formatter = SimpleCov::Formatter::Console
 SimpleCov.start
+
+require './lib/conferrable'
