@@ -22,4 +22,4 @@ addons:
   # https://docs.travis-ci.com/user/uploading-artifacts/
   artifacts:
     paths:
-      - Gemfile.loc
+      - Gemfile.lock
