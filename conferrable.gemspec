@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
     Conferrable standardizes how we interact with these static YAML configuration files.
   DESCRIPTION
 
-  s.authors     = ['Matthew Ruggio']
-  s.email       = ['mruggio@bluemarblepayroll.com']
+  s.authors     = ['Matthew Ruggio', 'Ryan Gerry']
+  s.email       = ['mruggio@bluemarblepayroll.com', 'rgerry@bluemarblepayroll.com']
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }

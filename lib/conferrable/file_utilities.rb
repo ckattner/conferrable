@@ -20,7 +20,15 @@ module Conferrable
       end
 
       def read(filename)
-        YAML.safe_load(ERB.new(IO.read(filename)).result)
+        file_content = IO.read(filename)
+
+        pre_processed_content = if filename.end_with?('.erb')
+                                  ERB.new(file_content).result
+                                else
+                                  file_content
+                                end
+
+        YAML.safe_load(pre_processed_content)
       end
 
       private
