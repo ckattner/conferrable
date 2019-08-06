@@ -13,10 +13,14 @@ describe Conferrable::FileUtilities do
   let(:config_examples_path) { File.expand_path('../config_examples/', __dir__) }
 
   describe 'resolving file names' do
-    it 'finds all *.yml and *.yml.erb files given a directory path' do
+    it 'finds all YAML and YAML + ERB files with upper or lower case extensions' do
       expected_files = Set.new([
+                                 File.join(config_examples_path, 'full.yaml.erb'),
+                                 File.join(config_examples_path, 'full.yaml'),
+                                 File.join(config_examples_path, 'simple.yml.erb'),
                                  File.join(config_examples_path, 'simple.yml'),
-                                 File.join(config_examples_path, 'simple.yml.erb')
+                                 File.join(config_examples_path, 'UPPER.YML.ERB'),
+                                 File.join(config_examples_path, 'UPPER.YML')
                                ])
 
       expect(Set.new(described_class.resolve(config_examples_path))).to eq expected_files
@@ -33,6 +37,13 @@ describe Conferrable::FileUtilities do
 
     it 'returns a parsed YAML and ERB evaluated result for a *.yml.erb file' do
       file_path = File.join(config_examples_path, 'simple.yml.erb')
+      expected_result = { 'key1' => %w[static_element dynamic_element] }
+
+      expect(described_class.read(file_path)).to eq(expected_result)
+    end
+
+    it 'returns a parsed YAML and ERB evaluated result for an upper case *.YML.ERB file' do
+      file_path = File.join(config_examples_path, 'UPPER.YML.ERB')
       expected_result = { 'key1' => %w[static_element dynamic_element] }
 
       expect(described_class.read(file_path)).to eq(expected_result)
