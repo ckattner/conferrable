@@ -10,17 +10,30 @@
 require './spec/spec_helper'
 
 describe Conferrable::FileUtilities do
-  describe 'reading YAML files' do
-    it 'returns a parsed YAML and ERB evaluated result for a *.yml.erb file' do
-      file_path = File.expand_path('../config_examples/simple.yml.erb', __dir__)
-      expected_result = { 'key1' => %w[static_element dynamic_element] }
+  let(:config_examples_path) { File.expand_path('../config_examples/', __dir__) }
+
+  describe 'resolving file names' do
+    it 'finds all *.yml and *.yml.erb files given a directory path' do
+      expected_files = Set.new([
+                                 File.join(config_examples_path, 'simple.yml'),
+                                 File.join(config_examples_path, 'simple.yml.erb')
+                               ])
+
+      expect(Set.new(described_class.resolve(config_examples_path))).to eq expected_files
+    end
+  end
+
+  describe 'reading/parsing YAML files' do
+    it 'returns a parsed YAML evaluated result for a *.yml file' do
+      file_path = File.join(config_examples_path, 'simple.yml')
+      expected_result = { 'key1' => ['element1', '<%= "ERB which will not evaluate" =>'] }
 
       expect(described_class.read(file_path)).to eq(expected_result)
     end
 
-    it 'returns a parsed YAML evaluated result for a *.yml file' do
-      file_path = File.expand_path('../config_examples/simple.yml', __dir__)
-      expected_result = { 'key1' => ['element1', '<%= "ERB which will not evaluate" =>'] }
+    it 'returns a parsed YAML and ERB evaluated result for a *.yml.erb file' do
+      file_path = File.join(config_examples_path, 'simple.yml.erb')
+      expected_result = { 'key1' => %w[static_element dynamic_element] }
 
       expect(described_class.read(file_path)).to eq(expected_result)
     end

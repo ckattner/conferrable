@@ -44,7 +44,7 @@ module Conferrable
       end
 
       def glob_files_only(filename)
-        dir_name = File.join(filename, '**', '*.yml.erb')
+        dir_name = File.join(filename, '**', '*.{yml,yml.erb}')
         Dir.glob(dir_name).reject { |f| File.directory?(f) }
       end
     end
