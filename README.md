@@ -29,7 +29,7 @@ bundle add conferrable
 Lets say we have a configuration file located at:
 
 ````
-<app root>/config/config.yml
+<app root>/config/config.yaml
 ````
 
 We can access this by:
@@ -38,21 +38,23 @@ We can access this by:
 config = Conferrable.get_config # config will be a hash
 ````
 
+Note that the configuration file can also be called config.yml (three character extension).
+
 ### Multiple File Example
 
 Building on the simple example, say we have two configuration files:
 
 ````
-<app root>/config/config1.yml
-<app root>/config/config2.yml
+<app root>/config/config1.yaml
+<app root>/config/config2.yaml
 ````
 
 We can now explicitly set the files:
 
 ````
 files = [
-  './config/config1.yml',
-  './config/config2.yml',
+  './config/config1.yaml',
+  './config/config2.yaml',
 ]
 
 Conferrable.set_filenames(:config, files)
@@ -72,7 +74,7 @@ Note that the files will be loaded in alphabetical order.
 
 ### ERB Support ###
 
-If a configuration file ends in '.erb', then it will be pre-processed by the ERB templating system. For example, a file named config.yml.erb would first be processed by ERB and then parsed as a YAML file. This is helpful when dealing with more complex YAML files.
+If a configuration file ends in '.erb', then it will be pre-processed by the ERB templating system. For example, a file named config.yaml.erb would first be processed by ERB and then parsed as a YAML file. This is helpful when dealing with more complex YAML files.
 
 ## Contributing
 
