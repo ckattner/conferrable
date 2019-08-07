@@ -20,10 +20,19 @@ module Conferrable
       end
 
       def read(filename)
-        YAML.safe_load(ERB.new(IO.read(filename)).result)
+        file_content = IO.read(filename)
+
+        pre_processed_content =
+          filename.downcase.end_with?(ERB_EXTENSION) ? ERB.new(file_content).result : file_content
+
+        YAML.safe_load(pre_processed_content)
       end
 
       private
+
+      ERB_EXTENSION = '.erb'
+      FILE_MATCHER = /.+\.(ya?ml|ya?ml.erb)\Z/i.freeze
+      private_constant :ERB_EXTENSION, :FILE_MATCHER
 
       def list(filename)
         if File.exist?(filename) && File.directory?(filename)
@@ -36,8 +45,8 @@ module Conferrable
       end
 
       def glob_files_only(filename)
-        dir_name = File.join(filename, '**', '*.yml.erb')
-        Dir.glob(dir_name).reject { |f| File.directory?(f) }
+        dir_glob = File.join(filename, '**/*')
+        Dir.glob(dir_glob).grep(FILE_MATCHER).reject { |f| File.directory?(f) }
       end
     end
   end
